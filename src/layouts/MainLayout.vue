@@ -8,7 +8,7 @@
           round
           icon="menu"
           aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
+          v-on:click="leftDrawerOpen = !leftDrawerOpen"
           class="q-pa-md"
         />
 
@@ -26,8 +26,8 @@
     >
       <q-expansion-item class="q-pt-lg" icon="pages" label="Montage de plaque">
         <q-list>
-          <EssentialLink
-            v-for="link in essentialLinks"
+          <MontagePlaqueComponents
+            v-for="link in menuJsonMontageDePlaque"
             :key="link.title"
             v-bind="link"
           />
@@ -147,9 +147,9 @@
 </template>
 
 <script>
-import EssentialLink from "components/EssentialLink.vue";
+import MontagePlaqueComponents from "components/MenuMontagePlaque.vue";
 
-const linksData = [
+const montageDePlaque = [
   {
     title: "Materiels",
     icon: "check",
@@ -189,16 +189,33 @@ const linksData = [
     title: "Mise en place | Accroche des câbles",
     icon: "check",
     to: "/miseEnPlace"
-  }
-];
+  },
+  {
+    title: "Exemple de tiroir",
+    icon: "check",
+    to:"",
+    multi:[
+    {
+      title: "Exemple 1",
+      icon: "check",
+      to: "/miseEnPlace"
+    },
+    {
+      title: "Exemple 2",
+      icon: "check",
+      to: "/verificationCables"
+    },
+    ],
+  },
+]
 
 export default {
   name: "MainLayout",
-  components: { EssentialLink },
+  components: { MontagePlaqueComponents },
   data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
+      menuJsonMontageDePlaque: montageDePlaque
     };
   }
 };
