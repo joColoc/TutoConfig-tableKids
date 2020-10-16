@@ -48,8 +48,7 @@ export default {
       default: ""
     },
     multi: {
-      type: String,
-      default: ""
+      type: Array,
     },
   }
 };
